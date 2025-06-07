@@ -195,7 +195,7 @@ const Benefits = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button className="bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold px-10 py-5 text-xl rounded-full cursor-pointer transition-all duration-300 shadow-[0_10px_30px_rgba(255,215,0,0.4)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(255,215,0,0.5)] hover:scale-105">
-              Order Now - ₹1,999
+              Order Now - ₹3,999
             </button>
             <button className="bg-transparent text-gold-400 border-2 border-gold-400 font-bold px-10 py-4.5 text-xl rounded-full cursor-pointer transition-all duration-300 hover:bg-gold-400 hover:text-black hover:-translate-y-2">
               View Research Studies
