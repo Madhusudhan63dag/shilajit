@@ -8,7 +8,7 @@ const Review = () => {
     {
       id: 1,
       name: "Rajesh Kumar",
-      location: "Mumbai, Maharashtra",
+      location: "Chennai, Tamil Nadu",
       rating: 5,
       review: "After using this Himalayan Shilajit for 3 months, I feel completely transformed. My energy levels are through the roof, and I no longer feel tired during the day. Highly recommended!",
       verified: true,
@@ -16,8 +16,8 @@ const Review = () => {
     },
     {
       id: 2,
-      name: "Priya Sharma",
-      location: "Delhi, India",
+      name: "Priya Nair",
+      location: "Kochi, Kerala",
       rating: 5,
       review: "Amazing product! I was skeptical at first, but the results speak for themselves. Better sleep, improved focus, and overall wellness. Worth every penny!",
       verified: true,
@@ -25,8 +25,8 @@ const Review = () => {
     },
     {
       id: 3,
-      name: "Amit Patel",
-      location: "Ahmedabad, Gujarat",
+      name: "Venkatesh Reddy",
+      location: "Hyderabad, Telangana",
       rating: 5,
       review: "This is the real deal! Pure, authentic Shilajit that actually works. I've tried other brands but nothing compares to this quality. My stamina has improved significantly.",
       verified: true,
@@ -34,7 +34,7 @@ const Review = () => {
     },
     {
       id: 4,
-      name: "Dr. Sunita Rao",
+      name: "Dr. Lakshmi Rao",
       location: "Bangalore, Karnataka",
       rating: 5,
       review: "As a medical professional, I'm very particular about supplements. This Shilajit is exceptional - pure, potent, and delivers promised results. Recommending to my patients.",
@@ -43,8 +43,8 @@ const Review = () => {
     },
     {
       id: 5,
-      name: "Vikram Singh",
-      location: "Jaipur, Rajasthan",
+      name: "Arun Krishnan",
+      location: "Coimbatore, Tamil Nadu",
       rating: 5,
       review: "Incredible boost to my workout performance! Recovery time has reduced, and I feel more energetic throughout the day. This is now part of my daily routine.",
       verified: true,
@@ -52,8 +52,8 @@ const Review = () => {
     },
     {
       id: 6,
-      name: "Meera Reddy",
-      location: "Hyderabad, Telangana",
+      name: "Meera Menon",
+      location: "Thiruvananthapuram, Kerala",
       rating: 5,
       review: "Best investment in my health! Mental clarity has improved, and I feel more balanced overall. The quality is outstanding and shipping was super fast.",
       verified: true,
@@ -61,8 +61,8 @@ const Review = () => {
     },
     {
       id: 7,
-      name: "Arjun Mehta",
-      location: "Pune, Maharashtra",
+      name: "Suresh Iyer",
+      location: "Madurai, Tamil Nadu",
       rating: 5,
       review: "This Shilajit is a game-changer! My immunity has strengthened, and I rarely fall sick now. The authentic Himalayan quality is evident in every dose.",
       verified: true,
@@ -70,8 +70,8 @@ const Review = () => {
     },
     {
       id: 8,
-      name: "Kavita Joshi",
-      location: "Kolkata, West Bengal",
+      name: "Kavitha Pillai",
+      location: "Mangalore, Karnataka",
       rating: 5,
       review: "Amazing results within just 2 weeks! Better energy, improved digestion, and overall vitality. This is exactly what I was looking for in a natural supplement.",
       verified: true,
@@ -262,13 +262,14 @@ const Review = () => {
           </h3>
           <p className="text-gray-600 mb-8">
             Experience the same amazing results that our customers rave about
-          </p>          <motion.a
-            href="tel:+919030732444"
+          </p>
+          <motion.a
+            href="tel:+919030648333"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
           >
-             Call to Order Your Shilajit Today
+            📞 Call to Order Your Shilajit Today
           </motion.a>
         </motion.div>
       </div>

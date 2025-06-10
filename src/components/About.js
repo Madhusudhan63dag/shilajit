@@ -28,8 +28,7 @@ const About = () => {
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Discover the power of nature's most potent adaptogen, sourced from the pristine heights 
-            of the Himalayas and trusted by wellness enthusiasts worldwide.
+            We have a powerful, natural product that helps your body handle stress. It comes from the clean, high mountains of the Himalayas and is trusted by people who are focused on their health.
           </p>
         </div>
 
@@ -42,10 +41,7 @@ const About = () => {
                 What is Shilajit?
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              Shilajit is a natural, resin-like substance found in the high mountain rocks of the Himalayas. It forms over centuries from the slow breakdown of plants and minerals, creating a rich source of powerful nutrients.
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed">
-              Used for generations in Ayurvedic medicine, Shilajit is known for its ability to boost energy, support mental clarity, and promote overall wellness.
+              Shilajit is a natural, sticky substance from the Himalayan mountains. It's created over hundreds of years as plants and minerals break down, making it full of healthy nutrients. People have used it for a long time to increase their energy, improve their focus, and feel better overall.
               </p>
             </div>
             <div>

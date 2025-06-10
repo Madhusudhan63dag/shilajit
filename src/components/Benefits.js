@@ -156,31 +156,6 @@ const Benefits = () => {
               </div>
             </div>
           </div>
-
-          {/* Anti-Aging */}
-          <div className="group bg-gradient-to-br from-gold-500/10 to-gold-400/5 border border-gold-500/20 rounded-3xl p-8 hover:border-gold-500/40 transition-all duration-300 hover:-translate-y-2">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-white mb-3">Anti-Aging Properties</h3>
-            </div>
-            <div className="space-y-3 text-gray-300">
-              <div className="flex items-start gap-3">
-                <span className="text-gold-400 mt-1">•</span>
-                <span>Slows cellular aging process</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-gold-400 mt-1">•</span>
-                <span>Promotes healthy skin and hair</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-gold-400 mt-1">•</span>
-                <span>Supports longevity and vitality</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-gold-400 mt-1">•</span>
-                <span>Rich in fulvic and humic acids</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Call to Action */}
@@ -193,19 +168,10 @@ const Benefits = () => {
             Start your journey to optimal health with our premium Himalayan Shilajit.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold px-10 py-5 text-xl rounded-full cursor-pointer transition-all duration-300 shadow-[0_10px_30px_rgba(255,215,0,0.4)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(255,215,0,0.5)] hover:scale-105">
-              Order Now - ₹3,999
-            </button>
-            <button className="bg-transparent text-gold-400 border-2 border-gold-400 font-bold px-10 py-4.5 text-xl rounded-full cursor-pointer transition-all duration-300 hover:bg-gold-400 hover:text-black hover:-translate-y-2">
-              View Research Studies
-            </button>
-          </div>
-          
           <div className="mt-8 flex items-center justify-center gap-8 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <span className="text-gold-400">✓</span>
-              <span>30-Day Money Back</span>
+              <span>15-Day Money Back</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-gold-400">✓</span>

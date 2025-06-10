@@ -10,6 +10,8 @@ import Review from './components/Review';
 import TermsAndConditions from './components/TermsAndConditions';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ScrollToTop from './components/ScrollToTop';
+import Checkout from './page/Checkout';
+import ThankYou from './page/ThankYou';
 
 
 // Main page component
@@ -36,6 +38,8 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
       </div>
     </Router>
