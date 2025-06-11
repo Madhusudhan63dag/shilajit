@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import bannerImage from '../assets/banner2.jpg'; // Add your banner image here
+import bannerImage from '../assets/banner2.png'; // Add your banner image here
 import banner2 from '../assets/banner3.jpg'; // Ensure this path is correct
 import banner3 from '../assets/banner5.jpg'; // Ensure this path is correct
 
@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <header className="relative w-full">
+    <header id='home' className="relative w-full">
       {/* Include Navbar - Block element */}
       <Navbar />
       

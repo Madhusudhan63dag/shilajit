@@ -1,5 +1,5 @@
 import React from 'react';
-import about from '../assets/product3.jpg'; // Add your about image here
+import about from '../assets/product3.png'; // Add your about image here
 import lab from '../assets/lab.png'; // Add your lab image here
 import careful from '../assets/careful.png'; // Add your careful sourcing image here
 import pre from '../assets/package.png'; // Add your packaging image here
