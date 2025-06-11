@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import logo from '../assets/logo.png'; // Ensure this path is correct
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -360,7 +361,9 @@ const Checkout = () => {
       {/* Header Navigation */}
       <nav className="bg-black border-b border-gray-800 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-yellow-400">Shilajit Store</h1>
+          <a href="/" className="flex items-center space-x-4">
+          <img src={logo} alt="Shilajit Store" className="h-20" />
+          </a>
           <div className="flex items-center space-x-4">
             <span className="text-gray-300">Secure Checkout</span>
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>

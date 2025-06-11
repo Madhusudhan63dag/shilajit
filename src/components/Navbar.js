@@ -17,10 +17,10 @@ const Navbar = () => {
           About
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
-        <a href="#benefits" className="nav-link relative text-white font-medium py-2 transition-colors duration-300 hover:text-gold-500 group">
+        {/* <a href="#benefits" className="nav-link relative text-white font-medium py-2 transition-colors duration-300 hover:text-gold-500 group">
           Benefits
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300 group-hover:w-full"></span>
-        </a>
+        </a> */}
         <a href="#products" className="nav-link relative text-white font-medium py-2 transition-colors duration-300 hover:text-gold-500 group">
           Products
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300 group-hover:w-full"></span>

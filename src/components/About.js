@@ -1,8 +1,11 @@
 import React from 'react';
-import about from '../assets/about.jpg'; // Add your about image here
+import about from '../assets/product3.jpg'; // Add your about image here
 import lab from '../assets/lab.png'; // Add your lab image here
 import careful from '../assets/careful.png'; // Add your careful sourcing image here
 import pre from '../assets/package.png'; // Add your packaging image here
+import banner4 from '../assets/banner4.jpg'; // Add your banner image here
+import product from '../assets/product4.jpg'; // Add your product image here
+
 
 const About = () => {
   return (
@@ -27,9 +30,10 @@ const About = () => {
             </span>
           </h2>
           
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
             We have a powerful, natural product that helps your body handle stress. It comes from the clean, high mountains of the Himalayas and is trusted by people who are focused on their health.
           </p>
+
         </div>
 
         {/* Main Content Grid */}
@@ -54,7 +58,7 @@ const About = () => {
             </div>
 
             {/* Key Benefits */}
-            <div className="bg-gradient-to-br from-gold-500/10 to-gold-400/5 border border-gold-500/20 rounded-2xl p-6">
+            {/* <div className="bg-gradient-to-br from-gold-500/10 to-gold-400/5 border border-gold-500/20 rounded-2xl p-6">
               <h4 className="text-xl font-bold text-gold-400 mb-4">Key Benefits</h4>
               <div className="grid grid-cols-1 gap-3">
                 <div className="flex items-center gap-3">
@@ -73,7 +77,7 @@ const About = () => {
                   <span className="text-white">Balances Hormones Naturally</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Content - Image/Visual */}
@@ -89,6 +93,9 @@ const About = () => {
             </div>
           </div>
         </div>
+        <div className="text-center mb-12">
+              <img src={banner4} alt="Shilajit Banner" className="w-full h-auto rounded-2xl shadow-lg object-cover" />
+        </div>
 
         {/* Our Process Section */}
         <div className="mb-20">
@@ -96,32 +103,60 @@ const About = () => {
             Our Quality Process
           </h3>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-gradient-to-br from-black/50 to-gray-900/50 rounded-2xl border border-gold-500/20">
-              <img src={careful} alt="Careful Sourcing" className="w-24 h-24 mx-auto" />
-              <h4 className="text-xl font-bold text-gold-400 mb-3">Careful Sourcing</h4>
-              <p className="text-gray-300">
-                Hand-picked from specific high-altitude locations in the Himalayas, 
-                ensuring only the purest and most potent Shilajit is collected.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Side - Product Image */}
+            <div className="relative">
+              <div className="bg-gradient-to-br from-gold-500/20 to-gold-400/10 rounded-3xl p-8 border border-gold-500/20 backdrop-blur-sm">
+                <div className="text-center">
+                  <img 
+                    src={product} 
+                    alt="Pure Himalayan Shilajit Product" 
+                    className="w-full h-auto rounded-2xl shadow-lg object-cover"
+                  />
+                </div>
+              </div>
             </div>
-            
-            <div className="text-center p-6 bg-gradient-to-br from-black/50 to-gray-900/50 rounded-2xl border border-gold-500/20">
-              <img src={lab} alt="Lab Testing" className="w-24 h-24 mx-auto" />
-              <h4 className="text-xl font-bold text-gold-400 mb-3">Lab Testing</h4>
-              <p className="text-gray-300">
-                Rigorous third-party testing for purity, potency, and safety. 
-                Every batch is verified to meet our strict quality standards.
-              </p>
-            </div>
-            
-            <div className="text-center p-6 bg-gradient-to-br from-black/50 to-gray-900/50 rounded-2xl border border-gold-500/20">
-              <img src={pre} className='w-24 h-24 mx-auto' />
-              <h4 className="text-xl font-bold text-gold-400 mb-3">Premium Packaging</h4>
-              <p className="text-gray-300"> 
-                Sealed in airtight, UV-protected containers to preserve potency 
-                and ensure maximum freshness until it reaches you.
-              </p>
+
+            {/* Right Side - Process Steps */}
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-20 h-20 flex items-center justify-center flex-shrink-0">
+                  <img src={careful} alt="Careful Sourcing" className="w-12 h-12" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gold-400 mb-3">Careful Sourcing</h4>
+                  <p className="text-gray-300 leading-relaxed">
+                    Hand-picked from specific high-altitude locations in the Himalayas, 
+                    ensuring only the purest and most potent Shilajit is collected from pristine environments.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-20 h-20 rounded-xl border-2 border-gold-500/40 flex items-center justify-center bg-gradient-to-br from-black/50 to-gray-900/50 flex-shrink-0">
+                  <img src={lab} alt="Lab Testing" className="w-12 h-12" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gold-400 mb-3">Lab Testing</h4>
+                  <p className="text-gray-300 leading-relaxed">
+                    Rigorous third-party testing for purity, potency, and safety. 
+                    Every batch is verified to meet our strict quality standards before packaging.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-20 h-20 rounded-xl border-2 border-gold-500/40 flex items-center justify-center bg-gradient-to-br from-black/50 to-gray-900/50 flex-shrink-0">
+                  <img src={pre} alt="Premium Packaging" className="w-12 h-12" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gold-400 mb-3">Premium Packaging</h4>
+                  <p className="text-gray-300 leading-relaxed">
+                    Sealed in airtight, UV-protected containers to preserve potency 
+                    and ensure maximum freshness until it reaches your doorstep.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

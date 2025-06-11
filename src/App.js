@@ -10,6 +10,7 @@ import Review from './components/Review';
 import TermsAndConditions from './components/TermsAndConditions';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ScrollToTop from './components/ScrollToTop';
+import StickyBottomBar from './components/StickyBottomBar';
 import Checkout from './page/Checkout';
 import ThankYou from './page/ThankYou';
 
@@ -20,11 +21,12 @@ const MainPage = () => {
     <>
       <Header />
       <About />
-      <Benefits />
       <Product />
+      {/* <Benefits /> */}
       <Review />
-      {/* <Contact /> */}
+      <Contact />
       <Footer />
+      <StickyBottomBar />
     </>
   );
 };

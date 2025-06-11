@@ -6,177 +6,191 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
+    subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
-    alert('Thank you for your message! We will get back to you soon.');
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('https://razorpaybackend-wgbh.onrender.com/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'israelitesshopping171@gmail.com',
+          subject: `Contact Form: ${formData.subject}`,
+          message: `
+            Name: ${formData.name}
+            Email: ${formData.email}
+            Phone: ${formData.phone}
+            Subject: ${formData.subject}
+
+            Message:
+            ${formData.message}
+          `
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-amber-50 to-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="contact" className="py-20 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-amber-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-60 h-60 bg-yellow-400 rounded-full blur-3xl"></div>
+      </div>
+
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get In
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-yellow-500">
-              Touch
+
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Contact
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400">
+              Our Experts
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions about our premium Himalayan Shilajit? We're here to help you on your wellness journey.
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Have questions about our premium Himalayan Shilajit? Our team of experts is here to help you on your wellness journey.
           </p>
         </motion.div>
 
-        {/* Contact Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-xl p-8"
-        >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Field */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
-                placeholder="Enter your full name"
-              />
+        <div className=" gap-12 justify-center items-center">
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            {/* Contact Cards */}
+            <div className="flex flex-wrap flex-row items-center gap-6">
+              {/* Phone Numbers */}
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Call Us Now</h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="text-amber-400 mr-3">📞</span>
+                    <a href="tel:+919030648333" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
+                      +91 90306 48333
+                    </a>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-amber-400 mr-3">📞</span>
+                    <a href="tel:+919030732444" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
+                      +91 90307 32444
+                    </a>
+                  </div>
+                  <p className="text-gray-400 text-sm mt-3">Available 24/7 for your queries</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Email Us</h3>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-amber-400 mr-3">✉️</span>
+                  <a href="mailto:israelitesshopping171@gmail.com" className="text-white hover:text-amber-400 transition-colors text-lg">
+                    israelitesshopping171@gmail.com
+                  </a>
+                </div>
+                <p className="text-gray-400 text-sm mt-3">We'll respond within 24 hours</p>
+              </div>
+
+              {/* Support Hours */}
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Support Hours</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Monday - Saturday:</span>
+                    <span className="text-white font-semibold">9:00 AM - 9:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Sunday:</span>
+                    <span className="text-white font-semibold">10:00 AM - 6:00 PM</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
-                placeholder="Enter your email address"
-              />
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 gap-4">
+              <motion.a
+                href="tel:+919030648333"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-4 px-6 rounded-xl text-center hover:shadow-xl transition-all"
+              >
+                📞 Call Now
+              </motion.a>
             </div>
-
-            {/* Phone Field */}
-            <div>
-              <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
-                placeholder="Enter your phone number"
-              />
-            </div>
-
-            {/* Message Field */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                Message *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors resize-vertical"
-                placeholder="Tell us how we can help you..."
-              />
-            </div>            {/* Submit Button */}
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-            >
-              📧 Send Message
-            </motion.button>
-            
-            {/* Direct Call Button */}
-            <motion.a
-              href="tel:+919030732444"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-            >
-               Call Now for Instant Help
-            </motion.a>
-          </form>
-        </motion.div>
-
-        {/* Contact Information */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 grid md:grid-cols-3 gap-8"
-        >
-          {/* Email */}
-          <div className="text-center">
-            <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-              📧
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Email Us</h3>
-            <p className="text-gray-600">info@shilajit.com</p>
-          </div>          {/* Phone */}
-          <div className="text-center">
-            <h3 className="font-semibold text-gray-900 mb-2">Call Us</h3>
-            <a href="tel:+919030732444" className="text-gray-600 hover:text-amber-600 transition-colors">
-              +91 9030732444
-            </a>
-          </div>
-
-          {/* Support */}
-          <div className="text-center">
-            <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-              💬
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Support</h3>
-            <p className="text-gray-600">24/7 Customer Support</p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
