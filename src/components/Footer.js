@@ -62,12 +62,11 @@ const Footer = () => {
             >
               <h3 className="text-2xl font-bold mb-4">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">
-                  Himalayan Shilajit
+                  Shilajit Pure Himalayan 
                 </span>
               </h3>
               <p className="text-gray-300 mb-6 leading-relaxed">
-                Premium quality Shilajit sourced directly from the pristine Himalayas. 
-                Your trusted partner in natural wellness and vitality enhancement.
+              Sourced from the untouched heights of the Himalayas, our 100% pure Shilajit is a powerhouse of natural minerals and fulvic acid – designed to boost your energy, stamina, and overall wellness
               </p>
                 {/* Contact Info */}
               <div className="space-y-3">
