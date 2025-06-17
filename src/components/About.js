@@ -5,6 +5,7 @@ import careful from '../assets/careful.png'; // Add your careful sourcing image 
 import pre from '../assets/package.png'; // Add your packaging image here
 import banner4 from '../assets/banner4.jpg'; // Add your banner image here
 import product from '../assets/product4.jpg'; // Add your product image here
+import banner3 from '../assets/banner3.png'; // Add your banner image here
 
 
 const About = () => {
@@ -159,6 +160,10 @@ const About = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div>
+          <img src={banner3} alt="Shilajit Banner" className="w-full h-auto rounded-2xl shadow-lg object-cover mb-12" />
         </div>
 
         {/* Call to Action */}

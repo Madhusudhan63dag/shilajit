@@ -6,6 +6,8 @@ import product2 from '../assets/product2.jpg'; // Single box image 3
 import product3 from '../assets/productone.jpg'; // 1+1 Free product image
 import fassi from '../assets/fssai-color.png'; // FSSAI logo
 import gmp from '../assets/gmp.webp'; // FDA logo
+import banner2 from '../assets/banner2.png'; // Banner image
+// import banner3 from '../assets/banner3.jpg'; // Banner image 2
 
 
 
@@ -277,31 +279,9 @@ const Product = () => {
             </motion.div>
           </div>
         </div>
-
-
-        {/* YouTube Video Section - Full Width */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="w-screen h-screen">
-            <div className="bg-gradient-to-br from-amber-100 to-yellow-50 rounded-2xl p-5 shadow-xl">
-              <div className="relative overflow-hidden pt-[56.25%] rounded-xl shadow-inner">
-                <iframe 
-                  className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/bTyuL5P8SfQ" 
-                  title="Himalayan Shilajit - Premium Quality" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <div>
+          <img src={banner2} className='w-full h-auto object-cover rounded-lg shadow-md' />
+        </div>
       </div>
     </section>
   );
