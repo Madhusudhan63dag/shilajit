@@ -12,12 +12,22 @@ const Header = () => {
     // Add event listeners to track video loading status
     const videoElement = videoRef.current;
     if (videoElement) {
-      videoElement.addEventListener('loadeddata', () => setVideoLoaded(true));
-      videoElement.addEventListener('error', () => setVideoError(true));
+      const handleVideoLoaded = () => setVideoLoaded(true);
+      const handleVideoError = () => setVideoError(true);
+      
+      videoElement.addEventListener('loadeddata', handleVideoLoaded);
+      videoElement.addEventListener('error', handleVideoError);
+      
+      // Try to play the video immediately to test autoplay capability
+      videoElement.play().catch(err => {
+        console.log("Video autoplay failed:", err);
+        // If autoplay fails, we still want to show the video with play button
+        setVideoError(true);
+      });
       
       return () => {
-        videoElement.removeEventListener('loadeddata', () => setVideoLoaded(true));
-        videoElement.removeEventListener('error', () => setVideoError(true));
+        videoElement.removeEventListener('loadeddata', handleVideoLoaded);
+        videoElement.removeEventListener('error', handleVideoError);
       };
     }
   }, []);
@@ -44,12 +54,13 @@ const Header = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               autoPlay
-              unmuted
+              muted
               loop
               playsInline
               onError={() => setVideoError(true)}
             >
               <source src={backgroundVideo} type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
             <div className="absolute inset-0 bg-black/30"></div>
           </div>
