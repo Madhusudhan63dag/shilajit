@@ -1,92 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
-import bannerImage from '../assets/banner2.png'; // Add your banner image here
-import banner2 from '../assets/banner3.jpg'; // Ensure this path is correct
-import banner3 from '../assets/banner5.jpg'; // Ensure this path is correct
+import banner1 from '../assets/banner1.jpg';
+import backgroundVideo from '../assets/background.mp4';
 
 const Header = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const banners = [bannerImage, banner2, banner3];
-
-  // Auto-slide functionality
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef(null);
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % banners.length);
-    }, 5000); // Change slide every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [banners.length]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % banners.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + banners.length) % banners.length);
-  };
-
+    // Add event listeners to track video loading status
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.addEventListener('loadeddata', () => setVideoLoaded(true));
+      videoElement.addEventListener('error', () => setVideoError(true));
+      
+      return () => {
+        videoElement.removeEventListener('loadeddata', () => setVideoLoaded(true));
+        videoElement.removeEventListener('error', () => setVideoError(true));
+      };
+    }
+  }, []);
+  
   return (
     <header id='home' className="relative w-full">
-      {/* Include Navbar - Block element */}
       <Navbar />
       
-      {/* Banner Slider */}
       <div className="relative w-full h-[30vh] sm:h-[70vh] md:h-[80vh] lg:h-[calc(100vh-80px)] overflow-hidden">
-        {/* Banner Images */}
-        <div className="relative w-full h-full">
-          {banners.map((banner, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                index === currentSlide ? 'translate-x-0' : 
-                index < currentSlide ? '-translate-x-full' : 'translate-x-full'
-              }`}
-            >
-              <img 
-                src={banner} 
-                alt={`Shilajit Banner ${index + 1}`} 
-                className="w-full h-full  object-center"
-              />
-            </div>
-          ))}
+        {/* Always display banner1 as base layer */}
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src={banner1} 
+            alt="Shilajit Banner" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 z-10 touch-manipulation"
-        >
-          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
         
-        <button
-          onClick={nextSlide}
-          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 z-10 touch-manipulation"
-        >
-          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3 z-10">
-          {banners.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 touch-manipulation ${
-                index === currentSlide 
-                  ? 'bg-gold-400 scale-125' 
-                  : 'bg-white/50 hover:bg-white/70'
-              }`}
-            />
-          ))}
+        {/* Video layer that shows only when loaded */}
+        {!videoError && (
+          <div className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}>
+            <video 
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              autoPlay
+              unmuted
+              loop
+              playsInline
+              onError={() => setVideoError(true)}
+            >
+              <source src={backgroundVideo} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/30"></div>
+          </div>
+        )}
+        
+        {/* Content over video/image */}
+        <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Shilajit Pure Himalayan 
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-white">
+              100% Pure & Natural
+            </p>
+          </div>
         </div>
       </div>
     </header>
