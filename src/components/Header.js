@@ -54,7 +54,7 @@ const Header = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               autoPlay
-              muted
+              unmuted
               loop
               playsInline
               onError={() => setVideoError(true)}
