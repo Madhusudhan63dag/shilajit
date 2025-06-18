@@ -178,7 +178,8 @@ const Review = () => {
             }}
           >
             {/* Triple the reviews for seamless loop */}
-            {[...reviews, ...reviews, ...reviews].map((review, index) => (              <motion.div
+            {[...reviews, ...reviews, ...reviews].map((review, index) => (              
+              <motion.div
                 key={`${review.id}-${index}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -269,7 +270,7 @@ const Review = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
           >
-            📞 Call to Order Your Shilajit Today
+            Call to Order Your Shilajit Today
           </motion.a>
         </motion.div>
       </div>

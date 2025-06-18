@@ -32,7 +32,7 @@ const About = () => {
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            We have a powerful, natural product that helps your body handle stress. It comes from the clean, high mountains of the Himalayas and is trusted by people who are focused on their health.
+            We have a powerful, natural product that helps your body handle stress. It comes from the clean, high mountains of the Himalayas and is trusted by people who are focused on health.
           </p>
 
         </div>
@@ -46,16 +46,17 @@ const About = () => {
                 What is Shilajit?
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              Shilajit is a natural, sticky substance from the Himalayan mountains. It's created over hundreds of years as plants and minerals break down, making it full of healthy nutrients. People have used it for a long time to increase their energy, improve their focus, and feel better overall.
+                Shilajit is a natural, sticky substance from the Himalayan mountains. It's created over hundreds of years as plants and minerals break down, making it full of healthy nutrients. People have used it for a long time to increase their energy, improve their focus, and feel better overall. This ancient remedy is rich in fulvic acid and essential minerals that help the body absorb nutrients more effectively, boost stamina, and support healthy aging.
               </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                We source only the purest Himalayan Shilajit from elevations above 18,000 feet — far from pollution and human impact. This ensures maximum potency, purity, and natural strength in every dose. Each batch is carefully purified and tested for safety, giving you a trusted source of vitality straight from nature. Whether you want to enhance your physical performance, sharpen your mind, or support your immune system, our premium Shilajit is your daily dose of holistic wellness.
+              </p>
+
             </div>
             <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              {/* <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Why Our Shilajit?
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              We source only the purest Himalayan Shilajit from elevations above 18,000 feet — far from pollution and human impact. This ensures maximum potency, purity, and natural strength in every dose.
-              </p>
+              </h3> */}
             </div>
 
             {/* Key Benefits */}
@@ -161,10 +162,10 @@ const About = () => {
             </div>
           </div>
         </div>
-
+{/* 
         <div>
           <img src={banner3} alt="Shilajit Banner" className="w-full h-auto rounded-2xl shadow-lg object-cover mb-12" />
-        </div>
+        </div> */}
 
         {/* Call to Action */}
         <div className="text-center bg-gradient-to-r from-gold-500/10 to-gold-400/5 border border-gold-500/30 rounded-3xl p-8">
@@ -183,10 +184,10 @@ const About = () => {
               Call to Order Now
             </a>
             <a 
-              href="tel:+919030732444"
+              href="/checkout"
               className="bg-transparent text-gold-400 border-2 border-gold-400 font-bold px-8 py-3.5 text-lg rounded-full cursor-pointer transition-all duration-300 hover:bg-gold-400 hover:text-black hover:-translate-y-1 flex items-center justify-center gap-2"
             >
-              Get More Info
+              Order Now
             </a>
           </div>
         </div>

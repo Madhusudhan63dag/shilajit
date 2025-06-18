@@ -22,7 +22,7 @@ const MainPage = () => {
       <Header />
       <About />
       <Product />
-      {/* <Benefits /> */}
+      <Benefits />
       <Review />
       <Contact />
       <Footer />
@@ -47,5 +47,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;

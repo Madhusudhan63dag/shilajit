@@ -38,10 +38,10 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         {/* Mobile menu button */}
           <a 
-          href="tel:+919030648333"
+          href="/checkout"
           className="bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold px-4 lg:px-6 py-2 lg:py-3 rounded-full cursor-pointer transition-all duration-300 shadow-[0_4px_15px_rgba(255,215,0,0.3)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(255,215,0,0.4)] text-sm lg:text-base flex items-center gap-2"
         >
-           Call Now
+           Order Now
         </a>
       </div>
     </nav>

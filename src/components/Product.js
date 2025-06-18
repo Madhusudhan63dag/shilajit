@@ -263,7 +263,7 @@ const Product = () => {
                       whileTap={{ scale: 0.98 }}
                       className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 text-base"
                     >
-                      Order Now - ₹{currentOffer.price.toLocaleString()}
+                      Order Now
                     </motion.a>
                     <motion.a
                       href="tel:+919030648333"

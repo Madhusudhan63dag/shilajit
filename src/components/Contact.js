@@ -76,7 +76,7 @@ const Contact = () => {
         <div className="absolute bottom-20 right-10 w-60 h-60 bg-yellow-400 rounded-full blur-3xl"></div>
       </div>
 
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -84,8 +84,6 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-
-          
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Contact
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400">
@@ -98,18 +96,18 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className=" gap-12 justify-center items-center">
+        <div className="max-w-6xl mx-auto">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-10"
           >
             {/* Contact Cards */}
-            <div className="flex flex-wrap flex-row items-center gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Phone Numbers */}
-              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300 h-full">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
                     <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
@@ -136,7 +134,7 @@ const Contact = () => {
               </div>
 
               {/* Email */}
-              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300 h-full">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
                     <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
@@ -148,7 +146,7 @@ const Contact = () => {
                 </div>
                 <div className="flex items-center">
                   <span className="text-amber-400 mr-3">✉️</span>
-                  <a href="mailto:israelitesshopping171@gmail.com" className="text-white hover:text-amber-400 transition-colors text-lg">
+                  <a href="mailto:israelitesshopping171@gmail.com" className="text-white hover:text-amber-400 transition-colors text-lg break-words">
                     israelitesshopping171@gmail.com
                   </a>
                 </div>
@@ -156,7 +154,7 @@ const Contact = () => {
               </div>
 
               {/* Support Hours */}
-              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300">
+              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300 h-full">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
                     <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
@@ -179,14 +177,14 @@ const Contact = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-1 gap-4">
+            <div className="max-w-md mx-auto mt-10">
               <motion.a
-                href="tel:+919030648333"
+                href="/checkout"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-4 px-6 rounded-xl text-center hover:shadow-xl transition-all"
+                className="block bg-gradient-to-r from-green-600 to-green-700 text-white text-xl font-bold py-4 px-6 rounded-xl text-center hover:shadow-xl transition-all"
               >
-                📞 Call Now
+                Order Now
               </motion.a>
             </div>
           </motion.div>
