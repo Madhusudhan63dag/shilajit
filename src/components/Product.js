@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // import product from '../assets/product.jpg'; // Single box image 1
-import product1 from '../assets/product1.jpg'; // Single box image 2
-import product2 from '../assets/product2.jpg'; // Single box image 3
-import product3 from '../assets/productone.jpg'; // 1+1 Free product image
+import product1 from '../assets/product1.png'; // Single box image 2
+import product2 from '../assets/product2.png'; // Single box image 3
+import product3 from '../assets/productone.png'; // 1+1 Free product image
 import fassi from '../assets/fssai-color.png'; // FSSAI logo
 import gmp from '../assets/gmp.webp'; // FDA logo
 import banner2 from '../assets/banner2.png'; // Banner image
@@ -20,7 +20,7 @@ const Product = () => {
       id: 1,
       title: '1 Box Only',
       size: '20g',
-      price: 2500,
+      price: 990,
       originalPrice: 4999,
       description: 'Single box for personal use',
       badge: 'SINGLE PACK',
@@ -31,7 +31,7 @@ const Product = () => {
       id: 2,
       title: '2 Boxes (1+1 FREE)',
       size: '20g x 2',
-      price: 3990,
+      price: 1490,
       originalPrice: 7999,
       description: 'Premium Himalayan Shilajit - Buy 1 Get 1 Free Offer!',
       badge: 'BUY 1 GET 1 FREE!',
@@ -115,11 +115,11 @@ const Product = () => {
                         />
                         
                         {/* Special offer overlay for 1+1 offer */}
-                        {selectedOffer === 2 && (
+                        {/* {selectedOffer === 2 && (
                           <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm transform rotate-12 shadow-lg">
                             1+1 FREE!
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>
@@ -271,7 +271,7 @@ const Product = () => {
                       whileTap={{ scale: 0.98 }}
                       className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 text-sm"
                     >
-                      Call Our Experts - +91 90306 48333
+                      Call Our Experts
                     </motion.a>
                   </div>
                 </div>

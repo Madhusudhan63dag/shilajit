@@ -21,16 +21,16 @@ const Checkout = () => {
 
   const [orderItems, setOrderItems] = useState([]);
 
-  const [paymentMethod, setPaymentMethod] = useState('razorpay');
+  const [paymentMethod, setPaymentMethod] = useState('advance');
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
 
   const [productOptions] = useState([
     {
       id: 1,
-      name: 'Premium Shilajit - Single Box',
+      name: 'Premium Shilajit - Single Pack',
       quantity: 1,
-      price: 2500,
+      price: 990,
       originalPrice: 4999,
       sku: 'SHIL001',
       description: '20g Single Pack'
@@ -39,7 +39,7 @@ const Checkout = () => {
       id: 2,
       name: 'Premium Shilajit - Buy 1 Get 1 Free',
       quantity: 2,
-      price: 3990,
+      price: 1490,
       originalPrice: 7999,
       sku: 'SHIL002',
       description: '20g x 2 (1+1 Free)'
@@ -58,10 +58,23 @@ const Checkout = () => {
 
   const [selectedProduct, setSelectedProduct] = useState(getInitialProduct());
 
-  // Order calculation - Full amount for both payment methods
+  // Order calculation - Advance payment amounts
   const subtotal = selectedProduct.price;
   const discountAmount = 0;
   const totalAmount = subtotal - discountAmount;
+  
+  // Advance payment amounts
+  const getAdvanceAmount = (productId) => {
+    return productId === 1 ? 500 : 800; // Single pack: ₹1000, Two pack: ₹1500
+  };
+  
+  const advanceAmount = getAdvanceAmount(selectedProduct.id);
+  const balanceAmount = totalAmount - advanceAmount;
+
+  // Get payment amount based on selected payment method
+  const getPaymentAmount = () => {
+    return paymentMethod === 'full' ? totalAmount : advanceAmount;
+  };
 
   // Load Razorpay script
   useEffect(() => {
@@ -119,16 +132,17 @@ const Checkout = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Create Razorpay order - Full amount instead of advance
+  // Create Razorpay order - Based on payment method selection
   const createRazorpayOrder = async () => {
     try {
+      const paymentAmount = getPaymentAmount();
       const response = await fetch('https://razorpaybackend-wgbh.onrender.com/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: totalAmount, // Changed from advanceAmount to totalAmount
+          amount: paymentAmount,
           currency: 'INR',
           receipt: `receipt_${Date.now()}`,
           notes: {
@@ -136,7 +150,11 @@ const Checkout = () => {
             customerEmail: customerDetails.email,
             customerPhone: customerDetails.phone,
             productName: selectedProduct.name,
-            totalAmount: totalAmount
+            totalAmount: totalAmount,
+            paymentType: paymentMethod,
+            advanceAmount: advanceAmount,
+            balanceAmount: paymentMethod === 'full' ? 0 : balanceAmount,
+            paidAmount: paymentAmount
           }
         }),
       });
@@ -218,6 +236,12 @@ const Checkout = () => {
       // Send confirmation email
       await sendOrderConfirmation(orderNumber, paymentResponse);
       
+      // Create shipping address with payment note
+      const baseAddress = `${customerDetails.address}${customerDetails.apartment ? ', ' + customerDetails.apartment : ''}, ${customerDetails.city}, ${customerDetails.state} - ${customerDetails.zip}, ${customerDetails.country}`;
+      const shippingAddressWithNote = paymentMethod === 'advance' 
+        ? `${baseAddress} [ADVANCE PAID: ₹${advanceAmount}, BALANCE: ₹${balanceAmount}]`
+        : `${baseAddress} [FULL PAYMENT COMPLETED]`;
+      
       // Navigate to thank you page with order data
       navigate('/thank-you', {
         state: {
@@ -225,12 +249,16 @@ const Checkout = () => {
             orderNumber: orderNumber,
             productName: selectedProduct.name,
             totalAmount: totalAmount,
+            paymentType: paymentMethod,
+            paidAmount: getPaymentAmount(),
+            advanceAmount: paymentMethod === 'advance' ? advanceAmount : 0,
+            balanceAmount: paymentMethod === 'full' ? 0 : balanceAmount,
             paymentMethod: 'Razorpay',
             paymentId: paymentResponse.razorpay_payment_id,
             customerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
             customerEmail: customerDetails.email,
             customerPhone: customerDetails.phone,
-            shippingAddress: `${customerDetails.address}${customerDetails.apartment ? ', ' + customerDetails.apartment : ''}, ${customerDetails.city}, ${customerDetails.state} - ${customerDetails.zip}, ${customerDetails.country}`
+            shippingAddress: shippingAddressWithNote
           }
         }
       });
@@ -255,60 +283,20 @@ const Checkout = () => {
     setIsProcessing(true);
     
     try {
-      if (paymentMethod === 'razorpay') {
-        const orderData = await createRazorpayOrder();
-        await handleRazorpayPayment(orderData);
-      } else if (paymentMethod === 'cod') {
-        // Handle COD order
-        await handleCODOrder();
-      } else {
-        // Handle other payment methods
-        alert('Payment method not implemented yet.');
-        setIsProcessing(false);
-      }
+      const orderData = await createRazorpayOrder();
+      await handleRazorpayPayment(orderData);
     } catch (error) {
       console.error('Checkout error:', error);
       alert('Failed to process order. Please try again.');
       setIsProcessing(false);
     }
   };
-
-  // Handle COD order
-  const handleCODOrder = async () => {
-    try {
-      const orderNumber = `COD${Date.now()}`;
-      
-      // Send confirmation email for COD
-      await sendOrderConfirmation(orderNumber, { razorpay_payment_id: 'COD_ORDER' });
-      
-      // Navigate to thank you page with order data
-      navigate('/thank-you', {
-        state: {
-          orderData: {
-            orderNumber: orderNumber,
-            productName: selectedProduct.name,
-            totalAmount: totalAmount,
-            paymentMethod: 'COD',
-            paymentId: 'COD_ORDER',
-            customerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
-            customerEmail: customerDetails.email,
-            customerPhone: customerDetails.phone,
-            shippingAddress: `${customerDetails.address}${customerDetails.apartment ? ', ' + customerDetails.apartment : ''}, ${customerDetails.city}, ${customerDetails.state} - ${customerDetails.zip}, ${customerDetails.country}`
-          }
-        }
-      });
-      
-    } catch (error) {
-      console.error('COD order processing error:', error);
-      alert('There was an issue processing your order. Our team will contact you shortly.');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  // Send order confirmation email using /send-order-confirmation API
+  // Send order confirmation email using appropriate API based on payment method
   const sendOrderConfirmation = async (orderNumber, paymentResponse) => {
     try {
+      // Create detailed shipping address with payment note
+      const baseShippingAddress = `${customerDetails.address}${customerDetails.apartment ? ', ' + customerDetails.apartment : ''}, ${customerDetails.city}, ${customerDetails.state} - ${customerDetails.zip}, ${customerDetails.country}`;
+      
       const emailData = {
         customerEmail: customerDetails.email,
         orderDetails: {
@@ -320,16 +308,36 @@ const Checkout = () => {
             description: selectedProduct.description
           }],
           totalAmount: totalAmount,
+          paymentType: paymentMethod,
+          paidAmount: getPaymentAmount(),
+          advanceAmount: paymentMethod === 'advance' ? advanceAmount : 0,
+          balanceAmount: paymentMethod === 'full' ? 0 : balanceAmount,
           currency: '₹',
-          paymentMethod: paymentMethod === 'cod' ? 'COD' : 'Razorpay',
+          paymentMethod: 'Razorpay',
           paymentId: paymentResponse.razorpay_payment_id,
           quantity: selectedProduct.quantity,
-          productName: selectedProduct.name
+          productName: selectedProduct.name,
+          shippingNote: paymentMethod === 'advance' 
+            ? `ADVANCE PAID: ₹${advanceAmount}, BALANCE: ₹${balanceAmount} COD`
+            : 'FULL PAYMENT COMPLETED',
+          paymentNote: paymentMethod === 'advance' 
+            ? `Advance payment of ₹${advanceAmount} received. Balance amount ₹${balanceAmount} to be collected on delivery.`
+            : `Full payment of ₹${totalAmount} completed online. No amount due on delivery.`,
+          shippingAddress: baseShippingAddress,
+          shippingAddressWithNote: paymentMethod === 'advance' 
+            ? `${baseShippingAddress}\n\n** PAYMENT NOTE: Advance ₹${advanceAmount} paid online, Balance ₹${balanceAmount} to collect on delivery **`
+            : `${baseShippingAddress}\n\n** PAYMENT NOTE: Full payment ₹${totalAmount} completed online **`
         },
-        customerDetails: customerDetails
+        customerDetails: customerDetails,
+        productName: selectedProduct.name
       };
 
-      const response = await fetch('https://razorpaybackend-wgbh.onrender.com/send-order-confirmation', {
+      // Use different API endpoint based on payment method
+      const apiEndpoint = paymentMethod === 'advance' 
+        ? 'https://razorpaybackend-wgbh.onrender.com/send-advance-payment-confirmation'
+        : 'https://razorpaybackend-wgbh.onrender.com/send-order-confirmation';
+
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -744,88 +752,114 @@ const Checkout = () => {
                     <span>Total:</span>
                     <span>₹{totalAmount.toLocaleString()}</span>
                   </div>
-                  {paymentMethod === 'razorpay' && (
-                    <div className="bg-yellow-400/10 rounded-lg p-3 border border-yellow-400/30">
-                      <div className="flex justify-between text-yellow-400 font-bold text-xl">
-                        <span>Online Payment:</span>
-                        <span>₹{totalAmount.toLocaleString()}</span>
+                  
+                  {paymentMethod === 'advance' && (
+                    <>
+                      <div className="bg-yellow-400/10 rounded-lg p-3 border border-yellow-400/30">
+                        <div className="flex justify-between text-yellow-400 font-bold text-xl">
+                          <span>Advance Payment:</span>
+                          <span>₹{advanceAmount.toLocaleString()}</span>
+                        </div>
+                        <p className="text-yellow-300 text-xs mt-1">Pay now to confirm order</p>
                       </div>
-                      <p className="text-yellow-300 text-xs mt-1">Full payment online</p>
-                    </div>
+                      <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+                        <div className="flex justify-between text-gray-400">
+                          <span>Balance Amount:</span>
+                          <span>₹{balanceAmount.toLocaleString()}</span>
+                        </div>
+                        <p className="text-gray-500 text-xs mt-1">Pay on delivery</p>
+                      </div>
+                    </>
                   )}
-                  {paymentMethod === 'cod' && (
-                    <div className="bg-blue-400/10 rounded-lg p-3 border border-blue-400/30">
-                      <div className="flex justify-between text-blue-400 font-bold text-xl">
-                        <span>Cash on Delivery:</span>
+                  
+                  {paymentMethod === 'full' && (
+                    <div className="bg-green-400/10 rounded-lg p-3 border border-green-400/30">
+                      <div className="flex justify-between text-green-400 font-bold text-xl">
+                        <span>Full Payment:</span>
                         <span>₹{totalAmount.toLocaleString()}</span>
                       </div>
-                      <p className="text-blue-300 text-xs mt-1">Full payment on delivery</p>
+                      <p className="text-green-300 text-xs mt-1">Complete payment now</p>
                     </div>
                   )}
                 </div>
                 
-                {/* Payment Method - Updated descriptions */}
+                {/* Payment Method Options */}
                 <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-3 text-lg">Payment Method</h4>
+                  <h4 className="text-white font-semibold mb-3 text-lg">Payment Options</h4>
                   <div className="space-y-3">
-                    {/* Razorpay Option */}
+                    {/* Advance Payment Option */}
                     <div className={`bg-gray-800 rounded-xl p-4 border-2 transition-colors duration-300 ${
-                      paymentMethod === 'razorpay' ? 'border-yellow-400' : 'border-gray-700 hover:border-gray-600'
+                      paymentMethod === 'advance' ? 'border-yellow-400' : 'border-gray-700 hover:border-gray-600'
                     }`}>
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
                           name="paymentMethod"
-                          value="razorpay"
-                          checked={paymentMethod === 'razorpay'}
+                          value="advance"
+                          checked={paymentMethod === 'advance'}
                           onChange={(e) => setPaymentMethod(e.target.value)}
                           className="w-5 h-5 text-yellow-400 border-gray-600 focus:ring-yellow-400 focus:ring-2"
                         />
-                        <div className="ml-3 flex items-center">
-                          <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="Razorpay" className="w-6 h-6 mr-2" />
-                          <div>
-                            <span className="text-white font-medium">Online Payment</span>
-                            <p className="text-gray-400 text-sm">Cards, UPI, Net Banking</p>
+                        <div className="ml-3 flex items-center justify-between w-full">
+                          <div className="flex items-center">
+                            <svg className="w-6 h-6 mr-2 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                            </svg>
+                            <div>
+                              <span className="text-white font-medium">Advance Payment</span>
+                              <p className="text-gray-400 text-sm">Pay ₹{advanceAmount.toLocaleString()} now, rest on delivery</p>
+                            </div>
                           </div>
+                          <div className="text-yellow-400 font-bold">₹{advanceAmount.toLocaleString()}</div>
                         </div>
                       </label>
                     </div>
 
-                    {/* COD Option */}
+                    {/* Full Payment Option */}
                     <div className={`bg-gray-800 rounded-xl p-4 border-2 transition-colors duration-300 ${
-                      paymentMethod === 'cod' ? 'border-blue-400' : 'border-gray-700 hover:border-gray-600'
+                      paymentMethod === 'full' ? 'border-green-400' : 'border-gray-700 hover:border-gray-600'
                     }`}>
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
                           name="paymentMethod"
-                          value="cod"
-                          checked={paymentMethod === 'cod'}
+                          value="full"
+                          checked={paymentMethod === 'full'}
                           onChange={(e) => setPaymentMethod(e.target.value)}
-                          className="w-5 h-5 text-blue-400 border-gray-600 focus:ring-blue-400 focus:ring-2"
+                          className="w-5 h-5 text-green-400 border-gray-600 focus:ring-green-400 focus:ring-2"
                         />
-                        <div className="ml-3 flex items-center">
-                          <svg className="w-6 h-6 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                          </svg>
-                          <div>
-                            <span className="text-white font-medium">Cash on Delivery</span>
-                            <p className="text-gray-400 text-sm">Pay when you receive</p>
+                        <div className="ml-3 flex items-center justify-between w-full">
+                          <div className="flex items-center">
+                            <svg className="w-6 h-6 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            <div>
+                              <span className="text-white font-medium">Full Payment</span>
+                              <p className="text-gray-400 text-sm">Pay complete amount now</p>
+                            </div>
                           </div>
+                          <div className="text-green-400 font-bold">₹{totalAmount.toLocaleString()}</div>
                         </div>
                       </label>
                     </div>
                   </div>
+                  
+                  <div className="mt-3 bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+                    <div className="flex items-center text-gray-400 text-sm">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="Razorpay" className="w-4 h-4 mr-2" />
+                      Secure payment via Cards, UPI, Net Banking
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Submit Button - Updated text */}
+                {/* Submit Button */}
                 <button
                   type="submit"
                   onClick={handleSubmit}
                   disabled={isProcessing}
                   className={`w-full ${
-                    paymentMethod === 'cod' 
-                      ? 'bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-300 hover:to-blue-400' 
+                    paymentMethod === 'full'
+                      ? 'bg-gradient-to-r from-green-400 to-green-500 hover:from-green-300 hover:to-green-400'
                       : 'bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400'
                   } text-black font-bold py-4 px-6 rounded-xl text-lg transition-all duration-300 transform ${
                     isProcessing 
@@ -836,7 +870,7 @@ const Checkout = () => {
                   {isProcessing ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin mr-3"></div>
-                      {paymentMethod === 'cod' ? 'Placing Order...' : 'Processing Payment...'}
+                      Processing Payment...
                     </div>
                   ) : (
                     <>
@@ -844,30 +878,27 @@ const Checkout = () => {
                         <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                         </svg>
-                        {paymentMethod === 'cod' 
-                          ? `Place Order - ₹${totalAmount.toLocaleString()} COD`
-                          : `Pay Now - ₹${totalAmount.toLocaleString()}`
+                        {paymentMethod === 'full' 
+                          ? `Pay Full Amount - ₹${totalAmount.toLocaleString()}`
+                          : `Pay Advance - ₹${advanceAmount.toLocaleString()}`
                         }
                       </div>
                     </>
                   )}
                 </button>
                 
-                {/* Payment Note - Updated text */}
+                {/* Payment Note */}
                 <div className="mt-4 bg-gray-800/50 rounded-lg p-3 border border-gray-700">
                   <div className="flex items-center text-gray-400 text-sm">
                     <svg className="w-4 h-4 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                     </svg>
-                    {paymentMethod === 'cod' 
-                      ? 'Cash on Delivery - Pay when you receive your order'
-                      : 'Secure payment powered by Razorpay'
-                    }
+                    Secure payment powered by Razorpay
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    {paymentMethod === 'cod' 
-                      ? 'Full amount payable on delivery.'
-                      : 'Your payment information is encrypted and secure'
+                    {paymentMethod === 'full' 
+                      ? 'Complete payment now - no balance on delivery'
+                      : `Pay ₹${advanceAmount.toLocaleString()} now, balance ₹${balanceAmount.toLocaleString()} on delivery`
                     }
                   </p>
                 </div>

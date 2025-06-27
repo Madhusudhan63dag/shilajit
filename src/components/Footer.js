@@ -69,7 +69,7 @@ const Footer = () => {
                 </span>
               </h3>
               <p className="text-gray-300 mt-4 max-w-md mx-auto text-center">
-                Premium quality Shilajit from the untouched heights of the Himalayas - natural minerals and fulvic acid for your wellness
+                Premium quality Shilajit from the untouched heights of the Himalayas - natural minerals for your wellness
               </p>
             </motion.div>
 
@@ -132,16 +132,12 @@ const Footer = () => {
                 </div>
                 <div className="mt-6 text-center">
                   <div className="flex items-center justify-center space-x-3">
-                    <a href="tel:+919030732444" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
-                      +91 9030732444
-                    </a>
-                    <span className="text-gray-500">|</span>
-                    <a href="tel:+919030648333" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
-                      +91 9030648333
+                    <a href="tel:+919392277389" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
+                      +91 9392277389
                     </a>
                   </div>
-                  <a href="mailto:israelitesshopping171@gmail.com" className="text-gray-300 hover:text-amber-400 transition-colors text-sm mt-2 block">
-                    israelitesshopping171@gmail.com
+                  <a href="mailto:customercareproductcenter@gmail.com" className="text-gray-300 hover:text-amber-400 transition-colors text-sm mt-2 block">
+                    customercareproductcenter@gmail.com
                   </a>
                 </div>
               </motion.div>

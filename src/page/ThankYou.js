@@ -132,12 +132,6 @@ const ThankYou = () => {
           >
             Continue Shopping
           </button>
-          <a
-            href={`mailto:israelitesshopping171@gmail.com?subject=Order Inquiry - ${orderData.orderNumber}`}
-            className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-center"
-          >
-            Contact Support
-          </a>
         </div>
       </div>
     </div>

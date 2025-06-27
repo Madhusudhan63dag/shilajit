@@ -119,16 +119,16 @@ const Contact = () => {
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <span className="text-amber-400 mr-3">📞</span>
-                    <a href="tel:+919030648333" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
-                      +91 90306 48333
+                    <a href="tel:+919392277389" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
+                      +91 93922 77389
                     </a>
                   </div>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <span className="text-amber-400 mr-3">📞</span>
                     <a href="tel:+919030732444" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
                       +91 90307 32444
                     </a>
-                  </div>
+                  </div> */}
                   <p className="text-gray-400 text-sm mt-3">Available 24/7 for your queries</p>
                 </div>
               </div>
@@ -145,9 +145,8 @@ const Contact = () => {
                   <h3 className="text-2xl font-bold text-white">Email Us</h3>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-amber-400 mr-3">✉️</span>
-                  <a href="mailto:israelitesshopping171@gmail.com" className="text-white hover:text-amber-400 transition-colors text-lg break-words">
-                    israelitesshopping171@gmail.com
+                  <a href="mailto:customercareproductcenter@gmail.com" className="text-white hover:text-amber-400 transition-colors text-lg break-words">
+                    customercareproductcenter@gmail.com
                   </a>
                 </div>
                 <p className="text-gray-400 text-sm mt-3">We'll respond within 24 hours</p>
@@ -167,10 +166,6 @@ const Contact = () => {
                   <div className="flex justify-between">
                     <span className="text-gray-300">Monday - Saturday:</span>
                     <span className="text-white font-semibold">9:00 AM - 9:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-300">Sunday:</span>
-                    <span className="text-white font-semibold">10:00 AM - 6:00 PM</span>
                   </div>
                 </div>
               </div>

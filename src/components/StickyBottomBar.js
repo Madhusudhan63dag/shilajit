@@ -33,11 +33,11 @@ const StickyBottomBar = () => {
             <div className="flex flex-col min-w-0 flex-1">
               <h4 className="text-white font-bold text-base sm:text-lg truncate">Pure Himalayan Shilajit</h4>
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                <span className="text-gold-400 font-bold text-lg sm:text-xl">₹2,999</span>
-                <span className="text-gray-400 line-through text-sm sm:text-base">₹4,999</span>
+                <span className="text-gold-400 font-bold text-lg sm:text-xl">₹990</span>
+                {/* <span className="text-gray-400 line-through text-sm sm:text-base">₹4,999</span>
                 <span className="bg-gradient-to-r from-red-500 to-red-600 text-white text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 rounded-full shadow-lg">
-                  40% OFF
-                </span>
+                  50% OFF
+                </span> */}
               </div>
               <p className="text-gray-300 text-xs sm:text-sm mt-1 hidden sm:block">Limited Time Offer</p>
             </div>
