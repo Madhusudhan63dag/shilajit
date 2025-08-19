@@ -264,14 +264,6 @@ const Review = () => {
           <p className="text-gray-600 mb-8">
             Experience the same amazing results that our customers rave about
           </p>
-          <motion.a
-            href="tel:+919030648333"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
-          >
-            Call to Order Your Shilajit Today
-          </motion.a>
         </motion.div>
       </div>
     </section>

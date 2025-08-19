@@ -105,34 +105,7 @@ const Contact = () => {
             className="space-y-10"
           >
             {/* Contact Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Phone Numbers */}
-              <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300 h-full">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white">Call Us Now</h3>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center">
-                    <span className="text-amber-400 mr-3">📞</span>
-                    <a href="tel:+919392277389" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
-                      +91 93922 77389
-                    </a>
-                  </div>
-                  {/* <div className="flex items-center">
-                    <span className="text-amber-400 mr-3">📞</span>
-                    <a href="tel:+919030732444" className="text-white hover:text-amber-400 transition-colors text-lg font-semibold">
-                      +91 90307 32444
-                    </a>
-                  </div> */}
-                  <p className="text-gray-400 text-sm mt-3">Available 24/7 for your queries</p>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               {/* Email */}
               <div className="bg-gradient-to-br from-amber-500/10 to-yellow-400/5 border border-amber-500/20 rounded-3xl p-8 hover:border-amber-500/40 transition-all duration-300 h-full">
                 <div className="flex items-center mb-4">

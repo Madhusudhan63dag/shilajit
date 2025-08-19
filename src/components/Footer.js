@@ -131,11 +131,6 @@ const Footer = () => {
                   ))}
                 </div>
                 <div className="mt-6 text-center">
-                  <div className="flex items-center justify-center space-x-3">
-                    <a href="tel:+919392277389" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
-                      +91 9392277389
-                    </a>
-                  </div>
                   <a href="mailto:customercareproductcenter@gmail.com" className="text-gray-300 hover:text-amber-400 transition-colors text-sm mt-2 block">
                     customercareproductcenter@gmail.com
                   </a>

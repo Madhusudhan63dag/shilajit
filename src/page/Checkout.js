@@ -30,7 +30,7 @@ const Checkout = () => {
       id: 1,
       name: 'Premium Shilajit - Single Pack',
       quantity: 1,
-      price: 990,
+      price: 790,
       originalPrice: 4999,
       sku: 'SHIL001',
       description: '20g Single Pack'
@@ -39,7 +39,7 @@ const Checkout = () => {
       id: 2,
       name: 'Premium Shilajit - Buy 1 Get 1 Free',
       quantity: 2,
-      price: 1490,
+      price: 1580,
       originalPrice: 7999,
       sku: 'SHIL002',
       description: '20g x 2 (1+1 Free)'

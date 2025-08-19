@@ -20,7 +20,7 @@ const Product = () => {
       id: 1,
       title: '1 Box Only',
       size: '20g',
-      price: 990,
+      price: 790,
       originalPrice: 4999,
       description: 'Single box for personal use',
       badge: 'SINGLE PACK',
@@ -31,7 +31,7 @@ const Product = () => {
       id: 2,
       title: '2 Boxes (1+1 FREE)',
       size: '20g x 2',
-      price: 1490,
+      price: 1580,
       originalPrice: 7999,
       description: 'Premium Himalayan Shilajit - Buy 1 Get 1 Free Offer!',
       badge: 'BUY 1 GET 1 FREE!',
@@ -248,14 +248,6 @@ const Product = () => {
                 <div className="space-y-3">
                   
                   {/* Phone numbers display */}
-                  <div className="text-center py-1">
-                    <p className="text-gray-700 font-medium text-xs mb-1">Numbers to call:</p>
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-2 text-amber-600 font-bold text-sm">
-                      <span> 9030648333</span>
-                      <span className="hidden sm:inline text-gray-400">|</span>
-                      <span>9030732444</span>
-                    </div>
-                  </div>
                   <div className='flex flex-col sm:flex-row gap-4'>
                     <motion.a
                       href={`/checkout?product=${currentOffer.id}`}
@@ -264,14 +256,6 @@ const Product = () => {
                       className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 text-base"
                     >
                       Order Now
-                    </motion.a>
-                    <motion.a
-                      href="tel:+919030648333"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 text-sm"
-                    >
-                      Call Our Experts
                     </motion.a>
                   </div>
                 </div>

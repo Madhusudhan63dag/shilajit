@@ -178,12 +178,6 @@ const About = () => {
           </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="tel:+919030732444"
-              className="bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold px-8 py-4 text-lg rounded-full cursor-pointer transition-all duration-300 shadow-[0_8px_25px_rgba(255,215,0,0.4)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(255,215,0,0.5)] flex items-center justify-center gap-2"
-            >
-              Call to Order Now
-            </a>
-            <a 
               href="/checkout"
               className="bg-transparent text-gold-400 border-2 border-gold-400 font-bold px-8 py-3.5 text-lg rounded-full cursor-pointer transition-all duration-300 hover:bg-gold-400 hover:text-black hover:-translate-y-1 flex items-center justify-center gap-2"
             >
